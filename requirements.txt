@@ -8,5 +8,6 @@ requests
 openai
 transformers
 flask 
+python-dotenv
 
 
