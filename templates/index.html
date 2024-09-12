@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Text Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+</head>
+<body>
+    <section class="section">
+        <div class="container">
+            <h1 class="title">AI Text Generator</h1>
+            <p class="subtitle">Enter a prompt below and get a response from OpenAI!</p>
+            
+            <!-- Form to submit a prompt -->
+            <form method="POST">
+                <div class="field">
+                    <label class="label">Prompt</label>
+                    <div class="control">
+                        <textarea class="textarea" name="user_input" placeholder="Enter your prompt here..." required></textarea>
+                    </div>
+                </div>
+
+                <div class="control">
+                    <button class="button is-primary" type="submit">Submit</button>
+                </div>
+            </form>
+
+            <!-- Display the result if available -->
+            {% if result %}
+            <section class="section">
+                <h2 class="subtitle">AI Response:</h2>
+                <div class="box">
+                    <p>{{ result }}</p>
+                </div>
+            </section>
+            {% endif %}
+        </div>
+    </section>
+</body>
+</html>

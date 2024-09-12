@@ -1,18 +1,38 @@
 from flask import Flask, render_template, request
-import openai
+from openai import OpenAI
+
+client = OpenAI(
+    api_key="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"
+)
 
 app = Flask(__name__)
-openai.api_key = "your_openai_api_key"
+
+# Set your OpenAI API key here
 
 
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
-        prompt = request.form["prompt"]
-        response = openai.Completion.create(
-            engine="text-davinci-003", prompt=prompt, max_tokens=100
+        user_input = request.form.get("user_input")
+
+        if not user_input:
+            return render_template("index.html", error="No input provided.")
+
+        # New API call using 'chat.completions'
+        response = client.chat.completions.create(
+            model="gpt-3.5-turbo",  # Use the latest GPT model
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "user", "content": user_input},
+            ],
         )
-        return render_template("index.html", result=response.choices[0].text.strip())
+
+        # Extract the chatbot's response
+        chatbot_response = response.choices[0].message.content
+        return render_template(
+            "index.html", user_input=user_input, chatbot_response=chatbot_response
+        )
+
     return render_template("index.html")
 
 
