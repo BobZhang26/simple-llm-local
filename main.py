@@ -3,10 +3,10 @@ from openai import OpenAI
 from dotenv import load_dotenv
 import os
 
-# 加载环境变量
+# load env
 load_dotenv()
 
-# 从环境变量中获取API密钥
+# fetch key from env
 api_key = os.getenv("OPENAI_API_KEY")
 
 client = OpenAI(api_key=api_key)
